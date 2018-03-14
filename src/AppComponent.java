@@ -135,7 +135,6 @@ public class AppComponent {
 
     public Meter buildMeter(DeviceId deviceID, long rate) {
 //        long burstSize = 10000;
-
         band = DefaultBand.builder()
                 .burstSize(10000)
                 .ofType(Band.Type.DROP)
@@ -211,14 +210,10 @@ public class AppComponent {
             log.info("get path");
             log.info(paths.toString());
 
-//            MacAddress srcMac = MacAddress.valueOf(ip2mac.get(responses.getControlResponse(i).getSrc()));
-//            MacAddress dstMac = MacAddress.valueOf(ip2mac.get(responses.getControlResponse(i).getDst()));
             MacAddress srcMac = srcHost.mac();
             MacAddress dstMac = dstHost.mac();
 
             int tcpPort = responses.getControlResponse(i).getTcpport();
-//            int inPort = ip2port.get(responses.getControlResponse(i).getSrc());
-//            int outPort = ip2port.get(responses.getControlResponse(i).getDst());
 
             PortNumber inPortNumber = srcHost.location().port();
 
@@ -378,17 +373,6 @@ public class AppComponent {
         flowObjectiveService.forward(deviceId, forwardingObjective);
         log.info("FlowRule has been successfully distributed");
     }
-
-//    public ControlResponseDatabase generateResponse(ControlRequestDatabase requests) {
-//        log.info("The time slot is %s, and the requests are: %s\n",
-//                requests.getTimeslot(), requests.getControlRequestList());
-//        ControlResponseDatabase controlResponseDatabase = ControlResponseDatabase.newBuilder().setTimeslot(1)
-//                .addControlResponse(ControlResponse.newBuilder().setChunkIndex(10).setSrc("10.0.0.1")
-//                        .setDst("10.0.0.3").setTcpport(37500))
-//                .addControlResponse(ControlResponse.newBuilder().setChunkIndex(11).setSrc("10.0.0.5")
-//                        .setDst("10.0.0.9").setTcpport(39500)).build();
-//        return controlResponseDatabase;
-//    }
 
     private class ControlServiceImp extends ControlServiceGrpc.ControlServiceImplBase {
 
